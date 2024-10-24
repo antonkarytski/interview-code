@@ -15,6 +15,8 @@ const initialFormData: UserFormData = {
   tags: '',
 }
 
+const array = [1, 2, 3, 4, 5] // 1000 elements
+
 const Pattern = ({}: PatternProps) => {
   const [currentTag, setCurrentTag] = useState('')
   const [isTagSelected, setIsTagSelected] = useState(false)
@@ -24,6 +26,9 @@ const Pattern = ({}: PatternProps) => {
   const changeTag = useCallback((tag: string) => {
     setCurrentTag(tag)
     setIsTagSelected(true)
+    array.map((e) => {
+      return Math.random() * e
+    })
   }, [])
 
   useEffect(() => {
