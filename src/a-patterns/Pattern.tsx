@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import UserForm from './UserForm'
 import SaverPreview from './SaverPreview'
@@ -21,15 +21,10 @@ const Pattern = ({}: PatternProps) => {
   const [formData, setFormData] = useState<UserFormData>(initialFormData)
   const [eventsList, setEventsList] = useState<EventItem[]>([])
 
-  const changeTag = (tag: string) => {
+  const changeTag = useCallback((tag: string) => {
     setCurrentTag(tag)
     setIsTagSelected(true)
-  }
-
-  const functionWithALotOfCode = () => {
-    //No matter what this function does, here is just a lot of code
-    //...300 line of code and it does not use state of the component
-  }
+  }, [])
 
   useEffect(() => {
     getEventsList(
@@ -45,7 +40,7 @@ const Pattern = ({}: PatternProps) => {
       true,
       getEventsList
     ).then((events) => {
-      //about 300 items in the list
+      //We expect that events list might be a quite big
       setEventsList(events)
     })
   }, [])
